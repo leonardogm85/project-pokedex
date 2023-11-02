@@ -1,0 +1,5 @@
+<div class="input-group">
+  <input type="text" class="form-control form-control-lg" placeholder="Search Pokemon" aria-label="Search Pokemon"
+    aria-describedby="search" [(ngModel)]="term" [ngbTypeahead]="fnSearch">
+  <button class="btn btn-lg btn-outline-primary" type="button" id="search" (click)="onSearch()">Search</button>
+</div>

@@ -1,0 +1,17 @@
+<div class="card" *ngIf="pokemon">
+  <img *ngIf="pokemon.image" [src]="pokemon.image" class="card-img-top bg-light" [alt]="pokemon.name">
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ pokemon.name | titlecase }}
+    </h5>
+    <h6 class="card-text">
+      <span *ngFor="let type of pokemon.types" [ngClass]="getTypeClasses(type)">
+        {{ type | titlecase }}
+      </span>
+    </h6>
+    <small class="card-text text-body-secondary fw-bold d-flex align-items-center justify-content-between">
+      <span>{{ getPokemonNumber(pokemon.id) }}</span>
+      <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+    </small>
+  </div>
+</div>
