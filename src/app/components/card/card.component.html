@@ -2,16 +2,16 @@
   <img *ngIf="pokemon.image" [src]="pokemon.image" class="card-img-top bg-light" [alt]="pokemon.name">
   <div class="card-body">
     <h5 class="card-title">
-      {{ pokemon.name | titlecase }}
+      {{ pokemon.name | normalize }}
     </h5>
     <h6 class="card-text">
-      <span *ngFor="let type of pokemon.types" [ngClass]="getTypeClasses(type)">
-        {{ type | titlecase }}
+      <span *ngFor="let type of pokemon.types" class="badge me-1 mb-1" [appType]="type">
+        {{ type | normalize }}
       </span>
     </h6>
-    <small class="card-text text-body-secondary fw-bold d-flex align-items-center justify-content-between">
-      <span>{{ getPokemonNumber(pokemon.id) }}</span>
-      <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+    <small class="card-text text-body-secondary fw-bold d-flex justify-content-between align-items-center">
+      <span>N. {{ pokemon.id | padStart:4:'0' }}</span>
+      <button type="button" class="btn btn-sm btn-outline-primary" [routerLink]="['/view', pokemon.name]">View</button>
     </small>
   </div>
 </div>

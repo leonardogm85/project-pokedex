@@ -12,6 +12,10 @@ import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
 import { PageComponent } from './components/page/page.component';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
+import { NotFoundComponent } from './containers/not-found/not-found.component';
+import { NormalizePipe } from './pipes/normalize.pipe';
+import { PadStartPipe } from './pipes/pad-start.pipe';
+import { TypeDirective } from './directives/type.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.c
     CardComponent,
     SearchComponent,
     PageComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    NotFoundComponent,
+    NormalizePipe,
+    PadStartPipe,
+    TypeDirective
   ],
   imports: [
     BrowserModule,

@@ -19,12 +19,15 @@ export class ListComponent {
   constructor(
     private _pokemonService: PokemonService
   ) {
-    _pokemonService.pagedList(100000, 0).pipe(
+    _pokemonService.getPagedPokemonNameList(100000, 0).pipe(
       tap(list => this.paged.list = list),
       map(() => this.paged.slice),
-      switchMap(slice => slice.map(item => this._pokemonService.getByName(item))),
+      switchMap(slice => slice.map(item => this._pokemonService.getPokemonByName(item))),
       zipAll()
-    ).subscribe(slice => slice.forEach(item => this.pokemons.push(item)));
+    ).subscribe({
+      next: slice => slice.forEach(item => this.pokemons.push(item)),
+      error: err => { } // TODO: Implement error message
+    });
   }
 
   onSearch(search: string): void {
@@ -41,9 +44,12 @@ export class ListComponent {
 
   load(): void {
     of(this.paged.slice).pipe(
-      switchMap(slice => slice.map(item => this._pokemonService.getByName(item))),
+      switchMap(slice => slice.map(item => this._pokemonService.getPokemonByName(item))),
       zipAll()
-    ).subscribe(slice => slice.forEach(item => this.pokemons.push(item)));
+    ).subscribe({
+      next: slice => slice.forEach(item => this.pokemons.push(item)),
+      error: err => { } // TODO: Implement error message
+    });
   }
 
 }

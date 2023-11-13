@@ -4,7 +4,12 @@ export class Pokemon {
     public id: number,
     public name: string,
     public image: string,
-    public types: string[]
+    public experience: number,
+    public height: number,
+    public weight: number,
+    public types: string[],
+    public abilities: string[],
+    public stats: [string, number][]
   ) { }
 
 }

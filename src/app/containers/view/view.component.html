@@ -1,1 +1,99 @@
-<p>view works!</p>
+<div *ngIf="pokemon; else loading" class="row g-3">
+
+  <div class="col-lg-4 d-flex justify-content-center align-items-center">
+    <img [src]="pokemon.image" class="img-fluid rounded bg-light" [alt]="pokemon.name">
+  </div>
+
+  <div class="col-lg-6">
+
+    <div class="row g-0 mb-3">
+      <div
+        class="col-lg-12 d-flex justify-content-start align-items-center border-bottom border-2 border-primary border-opacity-50">
+        <h2 class="me-3">
+          {{ pokemon.name | normalize }}
+        </h2>
+        <h4 class="me-auto">
+          <span class="badge text-bg-secondary">{{ pokemon.id | padStart:4:'0' }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-12">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="me-auto fw-medium">
+              Experience
+            </div>
+            <span class="badge text-bg-light">{{ pokemon.experience }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="me-auto fw-medium">
+              Height
+            </div>
+            <span class="badge text-bg-light">{{ pokemon.height }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="me-auto fw-medium">
+              Weight
+            </div>
+            <span class="badge text-bg-light">{{ pokemon.weight }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row g-0 mb-3">
+      <h3 class="col-12 pb-1 border-bottom border-2 border-primary border-opacity-50">Types</h3>
+      <h4 *ngFor="let type of pokemon.types" class="col-auto">
+        <span class="badge me-1 mb-1" [appType]="type">{{ type | normalize }}</span>
+      </h4>
+    </div>
+
+    <div class="row g-0">
+      <h3 class="col-12 pb-1 border-bottom border-2 border-primary border-opacity-50">Abilities</h3>
+      <h4 *ngFor="let ability of pokemon.abilities" class="col-auto">
+        <span class="badge text-bg-light mb-1 me-1">{{ ability | normalize }}</span>
+      </h4>
+    </div>
+
+  </div>
+
+  <div class="col-lg-10">
+    <div class="row g-0">
+      <h3 class="col-12 pb-1 border-bottom border-2 border-primary border-opacity-50">Stats</h3>
+      <ng-template ngFor let-stat [ngForOf]="pokemon.stats">
+        <div class="col-2 p-2 fw-medium text-end align-self-center">
+          {{ stat[0] | normalize }}
+        </div>
+        <div class="col-10 py-2 align-self-center">
+          <div class="progress" role="progressbar" [attr.aria-label]="stat[0]" [attr.aria-valuenow]="stat[1]"
+            aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-primary bg-opacity-75 fw-bold" [style.width]="stat[1] + '%'">
+              {{ stat[1] }}
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="col-lg-10">
+    <div class="row g-0">
+      <h3 class="col-12 pb-1 border-bottom border-2 border-primary border-opacity-50">Evolutions</h3>
+      <div class="col-12 pt-2">
+        <div class="row g-3 d-flex justify-content-center align-items-center">
+          <app-card class="col-4" *ngFor="let evolution of evolutions" [pokemon]="evolution"></app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-10 d-flex justify-content-center align-items-center">
+    <button type="button" class="btn btn-primary" [routerLink]="['/list']">
+      Back To List
+    </button>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  Loading
+</ng-template>
