@@ -1,23 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { switchMap, zipAll, tap, map, of } from 'rxjs';
 
 import { PagedModel } from 'src/app/models/paged.model';
-import { Pokemon } from 'src/app/models/pokemon.model';
+import { PokemonModel } from 'src/app/models/pokemon.model';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnDestroy {
 
   readonly paged: PagedModel = new PagedModel();
 
-  pokemons: Pokemon[] = [];
+  pokemons: PokemonModel[] = [];
 
   constructor(
-    private _pokemonService: PokemonService
+    private _pokemonService: PokemonService,
+    private _toastService: ToastService
   ) {
     _pokemonService.getPagedPokemonNameList(100000, 0).pipe(
       tap(list => this.paged.list = list),
@@ -26,8 +28,12 @@ export class ListComponent {
       zipAll()
     ).subscribe({
       next: slice => slice.forEach(item => this.pokemons.push(item)),
-      error: err => { } // TODO: Implement error message
+      error: () => _toastService.showError('Error when starting the page!')
     });
+  }
+
+  ngOnDestroy(): void {
+    this._toastService.clear();
   }
 
   onSearch(search: string): void {
@@ -48,7 +54,7 @@ export class ListComponent {
       zipAll()
     ).subscribe({
       next: slice => slice.forEach(item => this.pokemons.push(item)),
-      error: err => { } // TODO: Implement error message
+      error: () => this._toastService.showError('Error when loading the page!')
     });
   }
 

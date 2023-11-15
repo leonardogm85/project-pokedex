@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, first, map, switchMap, zipAll } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Pokemon } from '../models/pokemon.model';
+import { PokemonModel } from '../models/pokemon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +25,11 @@ export class PokemonService {
     );
   }
 
-  getPokemonByName(name: string): Observable<Pokemon> {
+  getPokemonByName(name: string): Observable<PokemonModel> {
     return this._httpClient.get<any>(`${this._api}/pokemon/${name}`).pipe(
       first(),
       map(data => {
-        return new Pokemon(
+        return new PokemonModel(
           this.toProperty<number>(data, 'id'),
           this.toProperty<string>(data, 'name'),
           this.toProperty<string>(data, 'sprites.other.official-artwork.front_default'),
@@ -47,7 +47,7 @@ export class PokemonService {
     );
   }
 
-  getPokemonEvolutionsByName(name: string): Observable<Pokemon[]> {
+  getPokemonEvolutionsByName(name: string): Observable<PokemonModel[]> {
     return this._httpClient.get<any>(`${this._api}/pokemon-species/${name}`).pipe(
       first(),
       switchMap(data => this._httpClient.get<any>(this.toProperty<string>(data, 'evolution_chain.url'))),

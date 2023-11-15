@@ -1,4 +1,4 @@
-<div *ngIf="pokemon; else loading" class="row g-3">
+<div *ngIf="pokemon; else loading" class="row g-3 justify-content-center">
 
   <div class="col-lg-4 d-flex justify-content-center align-items-center">
     <img [src]="pokemon.image" class="img-fluid rounded bg-body-secondary" [alt]="pokemon.name">
@@ -87,7 +87,7 @@
   </div>
 
   <div class="col-lg-10 d-flex justify-content-center align-items-center">
-    <button type="button" class="btn btn-secondary" [routerLink]="['/list']">
+    <button type="button" class="btn btn-lg btn-secondary" [routerLink]="['/list']">
       Back To Pokemon List
     </button>
   </div>

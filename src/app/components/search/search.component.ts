@@ -18,7 +18,7 @@ export class SearchComponent {
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map((term) =>
+      map(term =>
         term.length < 2
           ? []
           : this.list.filter(item => item.toLowerCase().includes(term.toLowerCase())).slice(0, 10),

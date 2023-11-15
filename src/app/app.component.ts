@@ -8,7 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent { }
 
 // TODO:
-// 1. Create Error Message
-// 2. Create Loading Component Or Placeholder Component
-// 3. Create Not Found Component
-// 4. Create Filter By Type And Ability
+// 1. Create Loading Component Or Placeholder Component
+// 2. Create Filter By Type And Ability

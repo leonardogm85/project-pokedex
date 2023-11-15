@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NgbModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule, NgbToastModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { NormalizePipe } from './pipes/normalize.pipe';
 import { PadStartPipe } from './pipes/pad-start.pipe';
 import { TypeDirective } from './directives/type.directive';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TypeDirective } from './directives/type.directive';
     NotFoundComponent,
     NormalizePipe,
     PadStartPipe,
-    TypeDirective
+    TypeDirective,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { TypeDirective } from './directives/type.directive';
     NgbModule,
     NgbPaginationModule,
     NgbTypeaheadModule,
+    NgbToastModule,
     AppRoutingModule
   ],
   providers: [],
