@@ -186,3 +186,7 @@
 .dropdown-menu {
   min-width: 100%;
 }
+
+.dropdown-item.active {
+  background-color: rgba(108, 117, 125, 1);
+}
