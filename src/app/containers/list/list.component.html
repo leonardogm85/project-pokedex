@@ -2,11 +2,15 @@
 
   <app-search class="col-md-12" [list]="paged.list" (search)="onSearch($event)"></app-search>
 
-  <app-card class="col-md-2" *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></app-card>
+  <ng-template [ngIf]="pokemons.length > 0">
 
-  <app-page class="col-md-12 d-flex justify-content-center align-items-center" [pageNumber]="paged.pageNumber"
-    [pagesTotal]="paged.pagesTotal" (page)="onPage($event)"></app-page>
+    <app-card class="col-md-2" *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></app-card>
 
-  <app-scroll-to-top class="m-0"></app-scroll-to-top>
+    <app-page class="col-md-12 d-flex justify-content-center align-items-center" [pageNumber]="paged.pageNumber"
+      [pagesTotal]="paged.pagesTotal" (page)="onPage($event)"></app-page>
+
+    <app-scroll-to-top class="m-0"></app-scroll-to-top>
+
+  </ng-template>
 
 </div>

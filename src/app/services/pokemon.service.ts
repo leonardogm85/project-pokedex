@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, first, map, switchMap, zipAll } from 'rxjs';
+import { Observable, catchError, first, map, of, switchMap, zipAll } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { PokemonModel } from '../models/pokemon.model';
@@ -73,7 +73,8 @@ export class PokemonService {
         return evolutions;
       }),
       switchMap(pokemons => pokemons.map(pokemon => this.getPokemonByName(pokemon))),
-      zipAll()
+      zipAll(),
+      catchError(() => of<PokemonModel[]>([]))
     );
   }
 

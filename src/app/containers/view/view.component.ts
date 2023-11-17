@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap, throwError } from 'rxjs';
+import { switchMap, tap, throwError, catchError } from 'rxjs';
 
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { PokemonModel } from 'src/app/models/pokemon.model';

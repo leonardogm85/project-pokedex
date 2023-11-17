@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbPaginationModule, NgbToastModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { NormalizePipe } from './pipes/normalize.pipe';
 import { PadStartPipe } from './pipes/pad-start.pipe';
 import { TypeDirective } from './directives/type.directive';
 import { ToastComponent } from './components/toast/toast.component';
+import { spinnerInterceptor } from './interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,13 +40,23 @@ import { ToastComponent } from './components/toast/toast.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
     NgbModule,
     NgbPaginationModule,
     NgbTypeaheadModule,
     NgbToastModule,
+    NgxSpinnerModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    provideHttpClient(
+      withInterceptors([
+        spinnerInterceptor
+      ])
+    )
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
