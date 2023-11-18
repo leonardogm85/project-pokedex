@@ -6,5 +6,3 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent { }
-
-// TODO: Create Filter By Type And Ability
